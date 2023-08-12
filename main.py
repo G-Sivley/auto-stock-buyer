@@ -6,9 +6,9 @@ def main():
     # Get data from API or website
 
     # Once data is received use the numbers to calculate how many stocks to buy
-    fe = FrontEnd()
-    total_cash = float(input("How much cash do you have?: "))
-    sb = StockBrain(total_cash)
+    total_cash = 500 
+    sb = StockBrain(total_cash=total_cash)
+    fe = FrontEnd(sb=sb)
     while True:
         add_stock = input("Would you like to add a stock in text? (y/n): ")
         if add_stock.lower() == "y":

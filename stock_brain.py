@@ -10,6 +10,10 @@ class StockBrain:
         self.remaining_cash = total_cash
         self.stocks = []
 
+    def set_total_cash(self, total_cash: float):
+        self.starting_cash = total_cash
+        self.remaining_cash = total_cash
+
     def add_stock(self, stock: Stock):
         self.stocks.append(stock)
 
@@ -68,3 +72,13 @@ class StockBrain:
         new_stock = Stock(ticker=ticker, current_cost=current_cost,
                           percent_allocation=percent_allocation)
         self.stocks.append(new_stock)
+
+    def make_stock(self, ticker: str, percent_allocation: float):
+        yf_ticker = yf.Ticker(ticker)
+        current_cost = float(yf_ticker.info["ask"])
+        new_stock = Stock(ticker=ticker, current_cost=current_cost, percent_allocation=float(percent_allocation))
+        self.add_stock(new_stock)
+    
+    def print_stocks(self):
+        for i in self.stocks:
+            print(i)

@@ -13,4 +13,4 @@ class Stock:
         self.purchase_number = 0
 
     def __str__(self) -> str:
-        return f"Stock: {self.ticker} costs {self.current_cost} and you have allocated {self.percent_allocation * 100}%"
+        return f"Stock: {self.ticker} costs {self.current_cost} and you have allocated {(self.percent_allocation * 100)}%"

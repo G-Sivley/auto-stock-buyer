@@ -1,9 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 
+from stock_brain import StockBrain
+
 
 class FrontEnd():
-    def __init__(self) -> None:
+    def __init__(self, sb: StockBrain) -> None:
+        self.sb = sb
         self.total_cash = None
         self.ticker = None
         self.percent = None
@@ -59,16 +62,14 @@ class FrontEnd():
 
     def add_new_cash(self):
         total_cash = self.total_cash.get()
-        print(total_cash)
+        self.sb.set_total_cash(total_cash)
 
     def add_new_stock(self):
         ticker = self.ticker.get()
         percent = self.percent.get() 
-        print((ticker, percent))
-        
+        self.sb.make_stock(ticker=ticker, percent_allocation=percent) 
+        self.sb.print_stocks()
 
     def run_loop(self):
         self. root.mainloop()
 
-
-s = FrontEnd()
