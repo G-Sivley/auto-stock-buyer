@@ -1,3 +1,4 @@
+from front_end import FrontEnd
 from stock_brain import StockBrain
 
 
@@ -5,6 +6,7 @@ def main():
     # Get data from API or website
 
     # Once data is received use the numbers to calculate how many stocks to buy
+    fe = FrontEnd()
     total_cash = float(input("How much cash do you have?: "))
     sb = StockBrain(total_cash)
     while True:
