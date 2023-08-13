@@ -9,16 +9,10 @@ def main():
     total_cash = 500 
     sb = StockBrain(total_cash=total_cash)
     fe = FrontEnd(sb=sb)
-    while True:
-        add_stock = input("Would you like to add a stock in text? (y/n): ")
-        if add_stock.lower() == "y":
-            sb.make_stock_with_text()
-        else:
-            break
 
-    sb.allocate_cash()
-    for stock in sb.stocks:
-        print(f"Buy {stock.purchase_number} of {stock.ticker}!")
+    # sb.allocate_cash()
+    # for stock in sb.stocks:
+    #     print(f"Buy {stock.purchase_number} of {stock.ticker}!")
 
 # Buy the number of stocks
 
