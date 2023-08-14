@@ -74,7 +74,7 @@ class FrontEnd():
         self.root.bind("<Return>", lambda e: self.calculate)
 
     def add_new_cash(self):
-        total_cash = self.total_cash.get()
+        total_cash = float(self.total_cash.get())
         self.sb.set_total_cash(total_cash)
 
     def add_new_stock(self):
@@ -90,17 +90,27 @@ class FrontEnd():
         self.sb.allocate_cash()
 
         row = 7
+        percent = 0.0
+        total_cost = 0.0
         for stock in self.sb.stocks:
             ttk.Label(self.frm, text=stock.ticker).grid(column=1, row=row)
             ttk.Label(self.frm, text=stock.current_cost).grid(column=2, row=row)
             ttk.Label(self.frm, text=stock.percent_allocation).grid(column=3, row=row)
             ttk.Label(self.frm, text=stock.purchase_number).grid(column=4, row=row)
-            ttk.Label(self.frm, text={stock.purchase_number * stock.current_cost}).grid(column=5, row=row)
+            ttk.Label(self.frm, text=(stock.purchase_number * stock.current_cost)).grid(column=5, row=row)
+
+            percent += stock.percent_allocation
+            total_cost += (stock.purchase_number * stock.current_cost)
 
             row += 1
+            
+        ttk.Label(self.frm, text=percent, font="bold").grid(column=3, row=row+1)
+        ttk.Label(self.frm, text=total_cost, font="bold").grid(column=5, row=row+1)
+        
+
 
     def run_loop(self):
-        self. root.mainloop()
+        self.root.mainloop()
 
 sb = StockBrain(500)
 s = FrontEnd(sb)

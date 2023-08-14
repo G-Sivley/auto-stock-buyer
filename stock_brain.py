@@ -39,21 +39,26 @@ class StockBrain:
     # Buy Stocks
 
     def allocate_cash(self):
+        self.remaining_cash = self.starting_cash
         new_list = []
         self.order_stocks_by_percentage()
         for stock in self.stocks:
             allocation_cash = self.get_cost_can_allocate(
                 stock.percent_allocation)
 
+            # If last stock in list just buy the rest
+            if stock == self.stocks[-1]:
+                stock.purchase_number = self.get_floor(stock.current_cost, self.remaining_cash)
             # If there is not enough money do not buy stock
-            if stock.current_cost > self.remaining_cash:
+            
+            elif stock.current_cost > self.remaining_cash:
                 stock.purchase_number = 0
 
             # If the allocation cash is less than current cost, get the number of stocks can buy
             elif allocation_cash >= stock.current_cost:
                 stocks_can_buy = self.get_floor(
                     stock.current_cost, allocation_cash)
-                stock.purchase_number += stocks_can_buy
+                stock.purchase_number = stocks_can_buy
 
             # If there is enough money and the stock is not the last stock, buy at least one
             else:
